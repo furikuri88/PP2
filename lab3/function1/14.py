@@ -1,6 +1,6 @@
-from myfu11 import pol
+import funk
 s=input()
-if pol(s):
+if funk.pol(s):
     print("qop")
 else:
     print("poq")
