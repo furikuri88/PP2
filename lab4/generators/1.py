@@ -1,9 +1,7 @@
 import math
 n=int(input())
-def squ():
+def squ(n):
     for i in range(n):
         yield i**2
-a=squ()
-next(a)
-next(a)
-print(next(a))
+a=squ(n)
+print(list(a))
