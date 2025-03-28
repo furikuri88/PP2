@@ -3,10 +3,10 @@ import random
 pygame.init()
 #4496
 with open("record.txt", "r") as txt:
-    con = txt.read().strip()
+    con = txt.read().strip() #recordsave
 reco=int(con)
 with open("coins.txt", "r") as tx:
-    co = tx.read().strip()
+    co = tx.read().strip() #coinsave
 obc=int(co)
 clock=pygame.time.Clock()
 scr=pygame.display.set_mode((840,650))
@@ -23,18 +23,18 @@ ye=-93
 xe=random.randint(140,650)
 yc=-43
 xc=random.randint(140,650)
-while ((xc<xe and xe<xc+44) or (xc>xe and xe+48>xc)):
+while ((xc<xe and xe<xc+44) or (xc>xe and xe+48>xc)):    #because coin and enemy can have same position
     xc=random.randint(140,650)
 
 done=True
-sur=True
+sur=True #survival of player
 f=pygame.font.Font("fonts/cartoon.ttf",100)
 go=f.render("Game Over", False,(255,255,255))
 p=pygame.font.Font("fonts/day.ttf",60)
 pres=p.render("press R to restart",False,(0,0,0))
 rec=pygame.Surface((840,650))
 rec.fill(color="Red")
-crush=pygame.mixer.Sound("sounds/crash.wav")
+crush=pygame.mixer.Sound("sounds/crash.wav") #background song
 pygame.mixer.music.load("sounds/background.wav")
 pygame.mixer.music.play(-1)
 #132135
@@ -47,13 +47,17 @@ while done:
     for ev in pygame.event.get():
         if ev.type==pygame.QUIT:
             done=False
-        if ev.type==pygame.KEYDOWN and ev.key==pygame.K_r:
+        if ev.type==pygame.KEYDOWN and ev.key==pygame.K_r: #restart
             sur=True
             yc=-43
             cn=0
             xp=420
             ye=-93
             pygame.mixer.music.play(-1)
+            xe=random.randint(140,650)
+            xc=random.randint(140,650)
+            while (xc<xe and xe<xc+44) or (xc>xe and xe+48>xc):
+                xc=random.randint(140,650)
             scores=0
             
     if sur==True:
@@ -94,7 +98,7 @@ while done:
         scr.blit(coin,(0,0))
         scr.blit(tc,(53,10))
         scr.blit(coin,(xc,yc))
-    else:
+    else:   #game over screen
         scr.blit(rec,(0,0))
         scr.blit(go,(220,200))
         scr.blit(pres,(210,280))
@@ -102,13 +106,13 @@ while done:
         scr.blit(wer.render(f"best score: {reco}",False,(0,0,0)), (280,70))
         scr.blit(s.render(f"coins in round {cn}",False,("Yellow")),(360,420))
         scr.blit(wer.render(str(obc),False,"Yellow"), (240,5))
-        scr.blit(coin,(186,0))
+        scr.blit(coin,(186,0))    #all information about progress
 
-    if ye+93>yp and ye<yp+96 and ((xp<xe and xe<xp+44) or (xp>xe and xe+48>xp)) and sur==True:
+    if ye+93>yp and ye<yp+96 and ((xp<xe and xe<xp+44) or (xp>xe and xe+48>xp)) and sur==True: #for lose
         if scores>reco:
             reco=scores
             with open('record.txt', 'w') as file:
-                file.write(str(reco))
+                file.write(str(reco)) #rewrite
         obc+=cn
         with open('coins.txt', 'w') as file:
                 file.write(str(obc))

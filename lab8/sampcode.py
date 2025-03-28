@@ -1,6 +1,3 @@
-import random
+x=1
 y=1
-x=0
-while x!=y:
-    x=random.randint(0,10)
-    print(x)
+if ((x+40>rx or x-40<rx) and ((y<ry and y+40>ry)) or (y>ry and y-40<ry)) or ((y+40>ry or y-40<ry) and ((x<rx and x+40>rx)) or (x>rx and x-40<rx)):
